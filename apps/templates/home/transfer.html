@@ -1,0 +1,15 @@
+
+{% extends 'layouts/mngt/base.html' %}
+{% load static %}
+{% include "includes/navigation.html" %}
+{% block content %}
+
+    
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Transfer Funds</button>
+</form>
+       
+
+{% endblock content %}

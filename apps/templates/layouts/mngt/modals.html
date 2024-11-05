@@ -1,0 +1,18 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form role="form" method="post" autocomplete="off">
+            {% csrf_token %}
+        <div class="modal-body">
+          {{product_form}}
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn bg-gradient-dark" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn bg-gradient-primary">Create Product</button>
+        </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>

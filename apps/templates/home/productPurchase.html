@@ -1,0 +1,197 @@
+{% extends 'layouts/base-presentation.html' %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal Example</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{% block content %}
+<div class="container-fluid" style="padding-top: 70px;" >
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="row">
+                
+        <div class="col-md-12 mb-lg-0 mb-4">
+          <div class="card mt-4">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+              
+                
+              </div>
+            </div>
+            
+            <div class="row justify-content-center">
+              <div class="col-md-6 pd-4">
+                <div class="card card-background card-background-mask-primary tilt" data-tilt>
+                  <div class="full-background" style="background-image: url('https://images.unsplash.com/photo-1579389083395-4507e98b5e67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')"></div>
+                  <div class="card-body pt-7 text-center">
+                    <div class="icon icon-lg up mb-3 mt-3">
+                      
+                    
+                    </div>
+                    <h2 class="text-white up mb-0">{{products.package_name}} <br />$ {{products.package_price}}</h2>
+
+                    {% for product in product_data.productsDetail %}
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-sm">{{ product.bonus__bonus }}</h6>
+                      <span class="text-xs">{{ product.bonus__occurance__occurrence_type }}</span>
+                    </div>
+                    {% endfor%}
+
+
+
+                    <form method="post" id="orderForm">
+                      <div>
+                          {% csrf_token %}
+                          <div style="display: none;">
+                              {{ order_form }}
+                          </div>
+                      </div>
+                      <button type="submit" name='upgrade_button' class="btn btn-outline-white mt-5 up btn-round">
+                          <h2 class="text-white up mb-0">Purchase1</h2>
+                      </button>
+                  </form>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                          
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+          </div>
+        <div class="card h-100 mb-4">
+          <div class="card-header pb-0 px-3">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="mb-0"></h6>
+              </div>
+              
+            </div>
+          </div>
+          <div class="card-body pt-4 p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Product Detials</h6>
+            <ul class="list-group">
+              {% for product in product_data.productsDetail %}
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">{{ product.bonus__bonus }}</h6>
+                    <span class="text-xs">{{ product.bonus__occurance__occurrence_type }}</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                  {{ product.bonus__percentage }} %
+                </div>
+              </li>
+              {% endfor%}
+            </ul>
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3"></h6>
+            <ul class="list-group">
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm"></h6>
+                    <span class="text-xs"></span>
+                  </div>
+                </div>
+                <div class="col-6 text-end">
+                  <form method="post" id="orderForm">
+                    <div>
+                        {% csrf_token %}
+                        <div style="display: none;">
+                            {{ order_form }}
+                        </div>
+                    </div>
+                    <button type="submit" name='upgrade_button' class="btn btn-outline-white mt-5 up btn-round">
+                        <h2 class="text-white up mb-0">Purchase1</h2>
+                    </button>
+                </form>
+                 
+                </div>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+
+
+  
+        <!-- Modal -->
+       
+
+       
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              var orderForm = document.getElementById('orderForm');
+              var submitButton = orderForm.querySelector('button[type="submit"]');
+              
+              submitButton.addEventListener('click', function(event) {
+                  event.preventDefault();  // Prevent default form submission
+                  orderForm.submit();  // Manually submit the form
+              });
+          });
+      </script>
+  
+
+
+      <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul id="messageList" class="messages"></ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="redirectToPage()">Close</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+      function redirectToPage() {
+        // Replace 'your_target_url' with the URL you want to redirect to
+        window.location.href = '{% url 'apps_home:user_detail' %}'; 
+    }
+    $(document).ready(function() {
+        {% if messages %}
+            var messageList = $('#messageList');
+            {% for message in messages %}
+                messageList.append('<li class="{{ message.tags }}">{{ message }}</li>');
+            {% endfor %}
+            $('#messageModal').modal('show');
+        {% endif %}
+    });
+    </script>
+
+{% endblock content %}

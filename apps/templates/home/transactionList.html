@@ -1,0 +1,355 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<header class="header-2">
+    <div class="page-header section-height-25 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/curved-images/curved.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="text-center">
+            <h1 class="text-white">
+              <a class="text-white" target="_blank" 
+                 href="#">Life | Plus</a>
+            </h1>
+          
+           
+          </div>
+        </div>
+      </div>
+      <div class="position-absolute w-100 z-index-1 bottom-0">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="moving-waves">
+            <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+            <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+            <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+            <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+          </g>
+        </svg>
+      </div>
+    </div>
+</header>
+
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <!-- Header and E-Transfer Button -->
+    <div class="col-12 mb-4">
+      <div class="card-header pb-0 p-3 d-flex justify-content-between align-items-center">
+        <h6 class="mb-0"></h6>
+        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#AddMember">E-Transfer</button>
+      </div>
+    </div>
+    
+    <!-- Account Information Cards -->
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body p-4">
+          <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Main Float</h6>
+          <ul class="list-group">
+            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+              <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-1 text-dark text-sm">{{ mainFloataccount.0.acc_type__name }}</h6>
+                </div>
+              </div>
+              <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                {{ mainFloataccount.0.cur_bal }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body p-4">
+          <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Bonus Account</h6>
+          <ul class="list-group">
+            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+              <div class="d-flex align-items-center">
+                <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                  <i class="fas fa-arrow-down"></i>
+                </button>
+                <div class="d-flex flex-column">
+                  <h6 class="mb-1 text-dark text-sm">{{ bonusFloataccount.0.acc_type__name }}</h6>
+                </div>
+              </div>
+              <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                {{ bonusFloataccount.0.cur_bal }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body p-4">
+          <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Ordered Product</h6>
+          <ul class="list-group">
+            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+              <div class="d-flex align-items-center">
+                <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                  <i class="fas fa-arrow-down"></i>
+                </button>
+                <div class="d-flex flex-column">
+                  <h6 class="mb-1 text-dark text-sm">{{ mainOrder.package__package_name }}</h6>
+                </div>
+              </div>
+              <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                {{ mainOrder.package__package_price }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction Tables -->
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header pb-0 p-3">
+          <h5 class="card-title">Main Float Transactions</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Transaction Code</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Description</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for trans in mainFloat %}
+                <tr>
+                  <td class='align-middle text-left'>
+                    <span class="text-secondary text-xs font-weight-bold">{{ trans.order_date }}</span>
+                  </td>
+                  <td class='align-middle text-left'>
+                    <span class="text-secondary text-xs font-weight-bold">Tran-No - {{ trans.id }}</span>
+                  </td>
+                  <td class="align-middle text-left">
+                    <span class="text-secondary text-xs font-weight-bold">{{ trans.desc }}</span>
+                  </td>
+                  <td class="align-middle text-left">
+                    <span class="text-secondary text-xs font-weight-bold">{{ trans.amount }}</span>
+                  </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header pb-0 p-3">
+          <h5 class="card-title">Bonus Float Transactions</h5>
+        </div>
+          <div class="card-body px-0 pt-0 pb-0">
+            <div class="table-responsive p-4">
+              <table id="userTable" class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Transaction Code</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Description</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for trans in bonusFloat %}
+                  <tr>
+                    <td class='align-middle text-left'>
+                      <span class="text-secondary text-xs font-weight-bold">{{ trans.order_date }}</span>
+                    </td>
+                    <td class='align-middle text-left'>
+                      <span class="text-secondary text-xs font-weight-bold">Tran-No - {{ trans.id }}</span>
+                    </td>
+                    <td class="align-middle text-left">
+                      <span class="text-secondary text-xs font-weight-bold">{{ trans.desc }}</span>
+                    </td>
+                    <td class="align-middle text-left">
+                      <span class="text-secondary text-xs font-weight-bold">{{ trans.amount }}</span>
+                    </td>
+                    {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="AddMember" tabindex="-1" aria-labelledby="AddMemberLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddMemberLabel">Transfer Between Accounts</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="form-errors" class="alert alert-danger d-none"></div>
+        <form id="contact-form" method="post" autocomplete="off">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          
+          <div style="display: none;"> {{ form.source_user }}</div>
+          
+          <div class="input-group mb-4">
+            <select class="form-select" aria-label="Source Account Type" name="{{ form.source_acc_type.html_name }}">
+              <option value="" disabled selected>From</option>
+              {% for acc_type in form.source_acc_type.field.queryset %}
+                <option value="{{ acc_type.pk }}" {% if form.source_acc_type.value == acc_type.pk|stringformat:"s" %}selected{% endif %}>
+                  {{ acc_type }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="input-group mb-4">
+            <select class="form-select" aria-label="Destination Account Type" name="{{ form.destination_acc_type.html_name }}">
+              <option value="" disabled selected>To</option>
+              {% for acc_type in form.destination_acc_type.field.queryset %}
+                <option value="{{ acc_type.pk }}" {% if form.destination_acc_type.value == acc_type.pk|stringformat:"s" %}selected{% endif %}>
+                  {{ acc_type }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="input-group mb-4">
+            <input type="text" class="form-control" placeholder="" aria-label="Amount" 
+                   value="{{ form.amount.value|default:'' }}" name="{{ form.amount.html_name }}">
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Transfer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Successfully transferred
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#userTable').DataTable({
+        "pageLength": 10
+      });
+    });
+    
+
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('contact-form');
+      const errorDiv = document.getElementById('form-errors');
+  
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+  
+        const formData = new FormData(form);
+  
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRFToken': form.querySelector('[name="csrfmiddlewaretoken"]').value
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.messages) {
+            // Display form errors in the modal
+            errorDiv.innerHTML = Object.values(data.messages).join('<br>');
+            errorDiv.classList.remove('d-none');
+          } else if (data.redirect) {
+            // Redirect or update page if needed
+            window.location.href = data.redirect;
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('#contact-form');
+      const formErrors = document.querySelector('#form-errors');
+  
+      form.addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          
+          const formData = new FormData(form);
+  
+          fetch(form.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                  'X-Requested-With': 'XMLHttpRequest',
+                  'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Redirect to the new URL
+                  window.location.href = data.redirect_url;
+              } else {
+                  // Show form errors
+                  formErrors.innerHTML = Object.values(data.messages).map(message => message.join('<br>')).join('<br>');
+                  formErrors.classList.remove('d-none');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  });
+    </script>
+
+
+
+  
+  {% endblock content %}

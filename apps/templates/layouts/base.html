@@ -1,0 +1,248 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-design-system
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ ASSETS_ROOT }}/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="{{ ASSETS_ROOT }}/img/favicon.png">
+  <link rel="canonical" href="https://appseed.us/ui-kit/soft-ui-design-system"/>
+  
+  <title>
+    {% block title %}{% endblock %}
+  </title>
+
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="{{ ASSETS_ROOT }}/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="{{ ASSETS_ROOT }}/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{{ ASSETS_ROOT }}/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{{ ASSETS_ROOT }}/css/soft-design-system.css?v=1.0.1" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}
+  
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box !important;
+    }
+    
+    .cd__main{
+      background: RGBA(0, 58, 97, 1) !important;
+      display: block !important;
+    }
+    
+    * {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      
+      border: 0 none;
+      transition: all ease .4s;
+    }
+    
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Fjalla One', sans-serif;
+      font-size: 18px;
+    }
+    
+    h1 {
+      padding-top: 40px;
+        
+      color: #ccc;
+      text-align: center;
+      font-size: 1.8rem;
+         
+        text-shadow: rgba(0,0,0,0.6) 1px 0, rgba(0,0,0,0.6) 1px 0, rgba(0,0,0,0.6) 0 1px, rgba(0,0,0,0.6) 0 1px;
+    }
+    
+    .nav {
+      margin: 20px auto;
+      width: 455px;
+      min-height: auto;
+    }
+    
+    .nav ul {
+      position: relative;
+      padding-top: 20px; 
+    }
+    
+    .nav li {
+      position: relative;
+      padding: 20px 3px 0 3px; 
+      float: left; 
+      
+      text-align: center;
+      list-style-type: none; 
+    }
+    
+    .nav li::before, .nav li::after{
+      content: '';
+      position: absolute; 
+      top: 0; 
+      right: 50%;
+      width: 50%; 
+      height: 20px;
+      border-top: 1px solid #ccc;
+    }
+    
+    .nav li::after{
+      left: 50%;
+      right: auto; 
+      
+      border-left: 1px solid #ccc;
+    }
+    
+    .nav li:only-child::after, .nav li:only-child::before {
+      content: '';
+      display: none;
+    }
+    
+    .nav li:only-child{ padding-top: 0;}
+    .nav li:first-child::before, .nav li:last-child::after{
+      border: 0 none;
+    }
+    
+    .nav li:last-child::before{
+      border-right: 1px solid #ccc;
+      border-radius: 0 5px 0 0;
+    }
+    
+    .nav li:first-child::after{
+        border-radius: 5px 0 0 0;
+    }
+    .nav ul ul::before{
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      border-left: 1px solid #ccc;
+      width: 0; 
+      height: 20px;
+    }
+    
+    .nav li a{
+      display: inline-block;
+      padding: 5px 10px;
+      
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #ccc;
+      font-family: arial, verdana, tahoma;
+      font-size: 11px;
+    }
+    
+    .nav li a:hover, .nav li a:hover+ul li a {
+      color: #000;
+      background: #c8e4f8;   
+      border: 1px solid #94a0b4;
+    }
+    
+    .nav li a:hover+ul li::after, 
+    .nav li a:hover+ul li::before, 
+    .nav li a:hover+ul::before, 
+    .nav li a:hover+ul ul::before{
+      content: '';
+      border-color: #94a0b4;
+    }
+</style>
+  
+  
+  
+  {% endblock stylesheets %}
+
+</head>
+<body class="{% block body_class %}{% endblock body_class %}">
+
+    {% block content %}{% endblock content %}
+  
+    {% include "includes/footer.html" %}
+
+    {% include "includes/scripts.html" %}
+
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}
+  <script>
+    // Your AJAX function
+    function handleCaseMailAdd() {
+        $.ajax({
+            type: 'POST',
+            url: '<script>
+        // Your AJAX function
+        function handleCaseMailAdd() {
+            $.ajax({
+                type: 'POST',
+                url: 'mailfetch',
+                success: function(response) {
+                    console.log('Request successful');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Request failed');
+                }
+            });
+        }
+
+        // Event listener for the button click
+        $(document).ready(function() {
+            $('#yourButtonId').on('click', function() {
+                handleCaseMailAdd(); // Call the AJAX function when the button is clicked
+            });
+        });
+    </script>',
+            success: function(response) {
+                console.log('Request successful');
+            },
+            error: function(xhr, status, error) {
+                console.error('Request failed');
+            }
+        });
+    }
+
+    // Event listener for the button click
+    $(document).ready(function() {
+        $('#yourButtonId').on('click', function() {
+            handleCaseMailAdd(); // Call the AJAX function when the button is clicked
+        });
+    });
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{% static 'js/soft-ui-dashboard.min.js' %}"></script>
+<!--<script src="{% static 'js/scripts.js' %}"></script>-->
+<script src="{% static 'js/genealogy.js' %}"></script>
+  
+  {% endblock javascripts %}
+  
+
+  
+
+</body>
+</html>

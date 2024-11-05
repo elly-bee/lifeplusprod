@@ -1,0 +1,175 @@
+{% extends 'layouts/mngt/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-8">
+      <div class="card mb-4">
+        <div class="card-body px-0 pt-0 pb-0">
+          <div class="table-responsive p-4">
+            <table id="userTable" class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Transaction Code</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Description</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                {% for trans in transaction_data %}
+                  <tr>
+                    <td class='align-middle text-left'>
+                      <span class="text-secondary text-xs font-weight-bold">{{trans.order_date}}</span>
+                    </td>
+                    <td class='align-middle text-left'>
+                      <span class="text-secondary text-xs font-weight-bold">Tran-No - {{trans.id}}</span>
+                    </td>
+                    <td class="align-middle text-left">
+                      <span class="text-secondary text-xs font-weight-bold">{{trans.desc}}</span>
+                    </td>
+                    <td class="align-middle text-left">
+                      <span class="text-secondary text-xs font-weight-bold">{{trans.amount}}</span>
+                    </td>
+                  </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4">
+      <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            <div class="col-6 d-flex align-items-center">
+              <h6 class="mb-0">Bonus Transactions</h6>
+            </div>
+          </div>
+        </div>
+
+       
+        <form method="post">
+          {% csrf_token %}
+          {{ formSearch.as_p }}
+          <button type="submit" name='search_destination'>Submit</button>
+      </form>
+      
+      {% if form.destination_user %}
+          <hr>
+          <h6 class="mb-3">Support Incentive (Keyin Bonus) Pay to</h6>
+          <ul class="list-unstyled mb-4">
+              <li><strong>First Name:</strong> {{ form.destination_user.value.first_name }}</li>
+              <li><strong>Last Name:</strong> {{ form.destination_user.value.last_name }}</li>
+              <li><strong>Username:</strong> {{ form.destination_user.value.username }}</li>
+              <li><strong>Email:</strong> {{ form.destination_user.value.email }}</li>
+          </ul>
+          <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" name="make_transfer" class="btn btn-outline-primary btn-sm mb-0">Make Transfer</button>
+          </form>
+      {% endif %}
+        <div class="card h-100">
+          <div class="card-body pt-4 p-3">
+            
+
+            <ul class="list-group">
+              <form id="contact-form" method="post" autocomplete="off">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                
+                <div class=""> {{ form.source_user }}</div>
+                <div> {{ form.destination_user }}</div>
+                
+                <div class="input-group mb-4">
+                  <select class="form-select" aria-label="Source Account Type" name="{{ form.source_acc_type.html_name }}">
+                    <option value="" disabled selected>From</option>
+                    {% for acc_type in form.source_acc_type.field.queryset %}
+                      <option value="{{ acc_type.pk }}" {% if form.source_acc_type.value == acc_type.pk|stringformat:"s" %}selected{% endif %}>
+                        {{ acc_type }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                
+                <div class="input-group mb-4">
+                  <select class="form-select" aria-label="Destination Account Type" name="{{ form.destination_acc_type.html_name }}">
+                    <option value="" disabled selected>To</option>
+                    {% for acc_type in form.destination_acc_type.field.queryset %}
+                      <option value="{{ acc_type.pk }}" {% if form.destination_acc_type.value == acc_type.pk|stringformat:"s" %}selected{% endif %}>
+                        {{ acc_type }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                
+                <div class="input-group mb-4">
+                  <input type="text" class="form-control" placeholder="" aria-label="Amount" 
+                         value="{{ form.amount.value|default:'' }}" name="{{ form.amount.html_name }}">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Transfer</button>
+              </form>
+              
+              <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" name="make_transfer">Submit</button>
+            </form>
+
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">Balance</h6>
+                    
+                  </div>
+                </div>
+                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                  
+                </div>
+                <div class="col-6 text-end">
+                 $ {{account_data.0.cur_bal}}
+                </div>
+               
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  
+  
+    {% include "includes/footer.html" %}
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#userTable').DataTable({
+        "pageLength": 10
+      });
+    });
+    
+
+  </script>
+  {% endblock content %}

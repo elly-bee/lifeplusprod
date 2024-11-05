@@ -1,0 +1,96 @@
+{% extends 'layouts/base-presentation.html' %}
+{% load static %}
+
+
+{% block content %}
+<header class="header-2">
+  <div class="page-header section-height-25 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/curved-images/curved.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="text-center">
+          <h1 class="text-white">
+            <a class="text-white" target="_blank" 
+               href="#">Life | Plus</a>
+          </h1>
+        
+         
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute w-100 z-index-1 bottom-0">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="moving-waves">
+          <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+          <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+          <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+          <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+<div class="page-header">
+  <div class="position-absolute fixed-top ms-auto w-50 h-100 rounded-3 z-index-0 d-none d-sm-none d-md-block me-n4" style="background-image: url(/static/assets/img/pngwing.com1.png); background-size: cover;">
+  </div>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-7 d-flex justify-content-center flex-column">
+        <div class="card card-body d-flex justify-content-center shadow-lg p-5 blur align-items-center">
+          <h3 class="text-center">Fund Account</h3>
+          <form role="form" id="contact-form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <div class="card-body">
+     
+                <div class="mb-4" style="display: none;">
+                    <label for="{{ form.accType.id_for_label }}" class="form-label">Account Type</label>
+                    {{ form.accType }}
+                </div>
+        
+                <div class="mb-4" style="display: none;">
+                    <label for="{{ form.user.id_for_label }}" class="form-label">User</label>
+                    {{ form.user}}
+                </div>
+                <div class="mb-4" style="display: none;">
+                  <label for="{{ form.tran_code.id_for_label }}" class="form-label">Account</label>
+                  {{ form.tran_code}}
+              </div>
+             
+                <div class="mb-4">
+                    <label for="" class="form-label">Enter Amount</label>
+                    {{ form.amount }}
+                </div>
+        
+                <button type="submit" class="btn btn-primary">Fund Account</button>
+            </div>
+        </form>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-check form-switch mb-4">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">I agree to the <a href="javascript:;" class="text-dark"><u>Terms and Conditions</u></a>.</label>
+                  </div>
+                </div>
+                
+              <!-- Include Bootstrap JS for additional functionality -->
+              <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}

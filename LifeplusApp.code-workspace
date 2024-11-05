@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Django/Kumenso/KumensoHMS"
+		},
+		{
+			"path": "../../../Music/gt_inv_app"
+		}
+	],
+	"settings": {}
+}

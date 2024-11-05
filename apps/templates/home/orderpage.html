@@ -1,0 +1,144 @@
+{% extends 'layouts/mngt/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-8">
+      <div class="card mb-4">
+        <div class="card-body px-0 pt-0 pb-0">
+          <div class="table-responsive p-4">
+            <table id="userTable" class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Users</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Order</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">order date</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for bonus_data in order_data %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                     
+                      <div class="d-flex flex-column justify-content-center">
+                        
+                        <h6 class="mb-0 text-sm">
+                          {{ bonus_data.user__first_name}} {{ bonus_data.user__last_name}}
+                         
+                          <a href=""></a>
+                          
+                        </h6>
+                        
+                        <p class="text-xs text-secondary mb-0">{{ bonus_data.user__username }} </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">{{ bonus_data.package__package_name}}</p>
+                    
+                  </td>
+
+                  
+                  <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{ bonus_data.package__package_price}}</p>
+                  </td>
+            
+
+
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold">{{ bonus_data.order_date}}</span>
+                  </td>
+
+                </tr>
+
+                {% endfor %}
+                
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4">
+      <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            <div class="col-6 d-flex align-items-center">
+              <h6 class="mb-0">Bonus Transactions</h6>
+            </div>
+          </div>
+        </div>
+        <div class="card h-100">
+          <div class="card-body pt-4 p-3">
+            
+
+            <ul class="list-group">
+              
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">{{product_1_data.0.package__package_name}}</h6>
+                    <span class="text-xs"></span>
+                  </div>
+                </div>
+                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                    {{product_1_data | length}}
+                  </div>
+               
+              </li>
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">{{product_2_data.0.package__package_name}}</h6>
+                    <span class="text-xs"></span>
+                  </div>
+                </div>
+                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                    {{product_1_data.0}}
+                  </div>
+              </li>
+              
+
+
+
+            
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+  
+  
+    {% include "includes/footer.html" %}
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#userTable').DataTable({
+        "pageLength": 10
+      });
+    });
+    
+
+  </script>
+  {% endblock content %}
